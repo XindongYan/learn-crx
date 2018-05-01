@@ -1,0 +1,58 @@
+{
+    "manifest_version": 2,
+    "name": "Learn-crx",
+    "description": "获取淘宝登陆信息",
+    "version": "0.5",
+    "icons": {
+        "16": "images/ali16.png",
+        "48": "images/ali48.png",
+        "128": "images/ali128.png"
+    },
+    "background": {
+        "page": "background.html"
+    },
+    "web_accessible_resources": [
+        "images/ali128.png"
+    ],
+    "browser_action": {
+        "default_icon": {
+            "16": "images/ali16.png",
+            "48": "images/ali48.png"
+        },
+        "default_title": "获取平台",
+        "default_popup": "index.html"
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "permissions": [
+        "tabs",
+        "cookies",
+        "*://*/*",
+        "notifications",
+        "background",
+        "webRequest",
+        "webRequestBlocking"
+      ],
+      "content_scripts": [{
+        "matches":[
+          "http://localhost:*/*",
+          "https://localhost:*/*"
+        ],
+        "js": [
+          "script/jquery.min.js",
+          "script/util.js",
+          "script/content.js"
+        ]
+      },{
+        "matches": [
+          "https://*.taobao.com/*",
+          "http://*.taobao.com/*"
+        ],
+        "js": [
+          "script/jquery.min.js",
+          "script/moment.js",
+          "script/util.js",
+          "script/sign.js",
+          "script/taobao_content.js"
+        ]
+      }]
+}
